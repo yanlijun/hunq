@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>基本信息</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui">
+    <!--<meta name="format-detection" content="telephone=no">-->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/mobiscroll.min.css">
+</head>
+<body>
+<div class="container content">
+    <div class="info">
+        <p class="txt-center txt-gary">* 必须填写内容</p>
+        <ul class="info-base">
+            <li><label for="nameMale">男方</label><input id="nameMale" type="text" placeholder="输入姓名"> *</li>
+            <li><label for="nameFemale">女方</label><input id="nameFemale" type="text" placeholder="输入姓名"> *</li>
+            <li><label for="datetime">日期</label><input id="datetime" type="text" placeholder="输入日期"> *</li>
+        </ul>
+        <ul class="info-other">
+            <li><label for="field1">酒店名称</label><input id="field1" type="text" placeholder="输入酒店名称"></li>
+            <li><label for="field2">酒店地址</label><input id="field2" type="text" placeholder="输入酒店地址"></li>
+            <li><label for="field3">宴会厅</label><input id="field3" type="text" placeholder="输入宴会厅"></li>
+            <li><label for="field4">婚庆公司</label><input id="field4" type="text" placeholder="输入婚庆公司"></li>
+            <li><label for="field5">婚车公司</label><input id="field5" type="text" placeholder="输入婚车公司"></li>
+            <li><label for="field6">婚纱摄影</label><input id="field6" type="text" placeholder="输入婚纱摄影"></li>
+            <li><label for="field7">特别感言</label><textarea id="field7" placeholder="输入特别感言"></textarea></li>
+        </ul>
+    </div>
+    <p class="txt-center"><a class="btn btn-large btn-tag bk-red" href="#">确定</a></p>
+</div>
+<script type="text/javascript" src="js/zepto.min.js"></script>
+<script type="text/javascript" src="js/mobiscroll.min.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#datetime').mobiscroll().datetime({
+            minDate: new Date(),
+            maxDate: new Date(2020,12,31,23,59)
+        });
+    });
+</script>
+</body>
+</html>

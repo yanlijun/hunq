@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>录制音频</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui">
+    <!--<meta name="format-detection" content="telephone=no">-->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="one-page container middle">
+    <div class="mid-content record">
+        <a class="record-start" href="javascript:"><i class="icon icon-microphone"></i></a>
+        <div class="record-result">
+            <div class="record-time">
+                <span class="record-time-minute">12</span>
+                <span class="record-time-second">41</span>
+            </div>
+            <div class="record-sprite"><img src="images/sprite.png" alt=""></div>
+            <div class="record-progress"><div class="record-progress-bar"></div></div>
+            <div class="record-recording">
+                <p>正在录音中...</p>
+                <a class="record-stop btn btn-large btn-tag bk-red" href="javascript:">结束</a>
+            </div>
+            <div class="record-end">
+                <p class="record-btn">
+                    <a class="record-btn-play" href="javascript:"><i class="icon icon-play"></i></a>
+                    <a class="record-btn-pause" href="javascript:"><i class="icon icon-pause"></i></a>
+                    <!--<a class="record-btn-stop" href="javascript:"><i class="icon icon-play"></i></a>-->
+                    <a class="record-btn-delete" href="javascript:"><i class="icon icon-del"></i></a>
+                </p>
+                <p><a class="record-upload btn btn-large btn-tag bk-red" href="#">确定上传</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+<div class="dialog-box">
+    <h3 class="dialog-title">提示</h3>
+    <div class="dialog-content">
+        <p id="DialogMsg">是否允许使用麦克风？</p>
+    </div>
+    <p class="dialog-btn">
+        <a class="btn btn-middle btn-tag bk-red dialog-btn-no" href="#">否</a>
+        <a class="btn btn-middle btn-tag bk-red dialog-btn-yes" href="#">是</a>
+    </p>
+</div>
+-->
+
+<script type="text/javascript" src="js/zepto.min.js"></script>
+<script type="text/javascript" src="js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>
