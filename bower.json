@@ -1,0 +1,24 @@
+{
+  "name": "Hunq",
+  "version": "1.0.0",
+  "description": "HUNQING template.",
+  "homepage": "yanlijun.com/client/hunq/templet.php",
+  "authors": "Kevin Yan",
+  "license": "MIT",
+  "keywords": [
+    "front-end",
+    "web",
+    "css"
+  ],
+  "main": [
+    "js/*"
+  ],
+  "ignore": [
+    "**/.*",
+    "test",
+    "Gemfile"
+  ],
+  "dependencies": {
+    
+  }
+}

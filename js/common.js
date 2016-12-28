@@ -4,7 +4,7 @@ window.Zepto = window.Zepto || {};
     "use strict";
 
     // if no Zepto library, then quit
-    if (typeof $ !== 'function') return;
+    if (typeof $ !== 'function') { return; }
 
     // some constant variables
     var MOBILE_REG = /(Android|iPhone|iPod|iPad|Windows Phone|SymbianOS|AppleWebKit.*Mobile.*)/i;
@@ -18,14 +18,21 @@ window.Zepto = window.Zepto || {};
     var TAP_CLICK_EVENT = IS_MOBILE ? 'tap' : 'click';
 
     $.extend($.fn, {
+        ajaxDebug: function(obj) {
+            var str = '';
+            for (var k in obj) {
+                str += k + ':' + obj[k] + '; ';
+            }
+            alert(str);
+        },
         setCookie: function(name, value, expire) {
             var exp  = new Date();
             exp.setTime(exp.getTime() + (expire > 0 ? expire: 30) * 24 * 3600 * 1000);
-            document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+            document.cookie = name + "=" + encodeURI(value) + ";expires=" + exp.toGMTString();
         },
         getCookie: function(name) {
             var arr = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"));
-            if (arr !== null) return unescape(arr[2]); return null;
+            if (arr !== null) { return decodeURI(arr[2]); } return null;
         },
         delCookie: function(name) {
             var exp = new Date();
@@ -40,7 +47,7 @@ window.Zepto = window.Zepto || {};
                     curr: 'current',  // the css class name of current page
                     next: 'next'      // the css class name of next page
                 },
-                percent: .28,         // the condition of sliding
+                percent: 0.28,         // the condition of sliding
                 dynamic: false,       // the inner item is dynamic
                 autoSlip: false,      // auto slip the item
                 beforehand: function() {},
@@ -69,8 +76,8 @@ window.Zepto = window.Zepto || {};
                 // direction is 1 or -1
                 if (typeof settings.direction === 'number') {
                     n = i - settings.direction;
-                    if (n === $items.length) n = 0;
-                    if (n < 0) n = $items.length - 1;
+                    if (n === $items.length) { n = 0; }
+                    if (n < 0) { n = $items.length - 1; }
                 }
                 return n;
             }
@@ -97,7 +104,7 @@ window.Zepto = window.Zepto || {};
                 var nextStartPosition = -settings.direction * 100 + '%';
                 var speed ='fast', currPosition, nextPosition;
 
-                if (typeof settings.direction !== 'number') return;
+                if (typeof settings.direction !== 'number') { return; }
 
                 // moving
                 $inner.data('isMoving', true);
@@ -130,7 +137,7 @@ window.Zepto = window.Zepto || {};
                     if (isSlide) {
                         $(this).addClass(o.classes.curr).siblings().removeClass(o.classes.curr);
                         // set the indicator current
-                        if ($indicators.length) setIndicators();
+                        if ($indicators.length) { setIndicators(); }
                         // global callback
                         typeof o.callback === 'function' && o.callback();
                     }
@@ -144,8 +151,8 @@ window.Zepto = window.Zepto || {};
             function bindControl(callback) {
                 $control.on(TAP_CLICK_EVENT, function() {
                     if (!$inner.data('isMoving')) {
-                        if ($(this).is('.left')) settings.direction = 1;
-                        if ($(this).is('.right')) settings.direction = -1;
+                        if ($(this).is('.left')) { settings.direction = 1; }
+                        if ($(this).is('.right')) { settings.direction = -1; }
                         typeof callback === 'function' && callback();
                     }
                 });
@@ -179,9 +186,9 @@ window.Zepto = window.Zepto || {};
                 // set items
                 getItems();
                 // if empty and  not dynamic, jump out;
-                if (!$items.length && !o.dynamic) return;
+                if (!$items.length && !o.dynamic) { return; }
                 // set the closure
-                if (o.dynamic) $.fn.carousel.items = getItems;
+                if (o.dynamic) { $.fn.carousel.items = getItems; }
 
                 // if beforehand
                 typeof o.beforehand === 'function' && o.beforehand();
@@ -191,19 +198,24 @@ window.Zepto = window.Zepto || {};
                     interval = setInterval(autoSlip, time);
                 }
                 // bind control buttons tap or click event
-                if ($control.length) bindControl(function() {
-                    if (o.autoSlip) autoSlip();
-                    else slipItem('', true);
-                });
+                if ($control.length) {
+                    bindControl(function() {
+                        if (o.autoSlip) {
+                            autoSlip();
+                        } else {
+                            slipItem('', true);
+                        }
+                    });
+                }
                 // add indicators children
-                if ($indicators.length) buildIndicators();
+                if ($indicators.length) { buildIndicators(); }
 
                 $inner
                     .on(EVENT_TOUCH_START, function(e) {
                         e.preventDefault();
                         e.stopPropagation();
 
-                        if (!$inner.data('isMoving')) isTouching = true;
+                        if (!$inner.data('isMoving')) { isTouching = true; }
                         x1 = (e.touches ? e.touches[0].pageX : e.pageX) - innerLeft;
                     })
                     .on(EVENT_TOUCH_MOVE, function(e) {
@@ -221,7 +233,7 @@ window.Zepto = window.Zepto || {};
                         isMoving = false;
                         slipItem(function() {
                             // reset interval
-                            if (o.autoSlip) interval = setInterval(autoSlip, time);
+                            if (o.autoSlip) { interval = setInterval(autoSlip, time); }
                         });
                     }
                 });
@@ -259,7 +271,7 @@ window.Zepto = window.Zepto || {};
 
             function init() {
                 // hide the media default ui
-                if (multimedia.controls) multimedia.controls = false;
+                if (multimedia.controls) { multimedia.controls = false; }
                 // multimedia.autoplay for iOS9 safari is hard to solve
                 // only tap event for document is effective
                 // build ui
@@ -361,7 +373,7 @@ window.Zepto = window.Zepto || {};
             // iOS9 safari not support new Date('2016-12-02 20:08:08');
             function setTime() {
                 var date = getTime(diff);
-				
+
                 $this.find('.countdown-days').text(date[0]);
                 $this.find('.countdown-hours').text(date[1]);
                 $this.find('.countdown-minutes').text(date[2]);
@@ -382,7 +394,8 @@ window.Zepto = window.Zepto || {};
             }
 
             function fillZero(n) {
-                return (n >= 0 && n < 10) ? '0' + n : n;
+                if (n < 10) { n = '0' + n; }
+                return n;
             }
 
             setTime();
@@ -414,24 +427,24 @@ window.Zepto = window.Zepto || {};
                     $.each(data.errors, function(key, value) {
                         errorInfo += ' ' + value;
                     });
-                    if (typeof fail === 'function') fail();
+                    if (typeof fail === 'function') { fail(); }
                     alert(errorInfo);
                 }
                 // the urls
                 if ($.isArray(data.urls) && data.urls.length) {
                     // save the path to the database
-                    if (typeof done === 'function') done(data.urls);
+                    if (typeof done === 'function') { done(data.urls); }
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                if (typeof fail === 'function') fail();
+                if (typeof fail === 'function') { fail(); }
                 alert(textStatus);  //textStatus - > parseerror
             },
             xhr: function(){
                 var xhr = $.ajaxSettings.xhr();
                 xhr.upload.onprogress = function(e) {
                     var percentage = Math.floor(e.loaded / e.total * 100);
-                    if (e.lengthComputable) $progress.width(percentage + '%');
+                    if (e.lengthComputable) { $progress.width(percentage + '%'); }
                 };
                 xhr.upload.onload = function() {
                     //$progress.width(0);
@@ -470,6 +483,8 @@ window.Zepto = window.Zepto || {};
     // operate the guide page
     $('.guide-items>li:not([disabled])').each(function(i) {
         var $this = $(this);
+
+        console.log($.fn.getCookie('guidestep'));
 
         if ($.fn.getCookie('guidestep') == i) {
             $this.addClass('selected').find('.guide-icon').removeClass('icon-color');
@@ -547,7 +562,7 @@ window.Zepto = window.Zepto || {};
         });
         var closeEvent = TAP_CLICK_EVENT === 'click' ? 'dblclick' : 'tap';
         alert(TAP_CLICK_EVENT + ' ' + closeEvent);
-        $pictures.live(closeEvent, albumHide);
+        $pictures.on(closeEvent, albumHide);
     }
     // build album
     function buildAlbum(curr) {
@@ -613,7 +628,7 @@ window.Zepto = window.Zepto || {};
         var $media = $btn.parent().find('video, audio');
         var isVideo = $media.is('video');
 
-        if (!$media.length) return;
+        if (!$media.length) { return; }
 
         $media.on('play', function() {
             if (isVideo) {
@@ -673,22 +688,15 @@ window.Zepto = window.Zepto || {};
     }
     function saveSenderInfo(name, addr) {
         $.get('userinfo.php?save', {name: name, addr: addr}, function(data) {
-            //ajaxDebug(data);
+            $.fn.ajaxDebug(data);
         }, 'json');
-    }
-    function ajaxDebug(obj) {
-        var str = '';
-        for (var k in obj) {
-            str += k + ':' + obj[k] + '; ';
-        }
-        alert(str);
     }
 
 
     // set wedding address map image
     function getMapImg($m, w, h, addr, call) {
-        if (typeof call === 'function')
-            var src = call(w, h, addr);
+        var src;
+        if (typeof call === 'function') { src = call(w, h, addr); }
 
         typeof src === 'string' && $m.attr('src', src);
         //window.open(src, '_blank');  // debug, get the error info on mobile
@@ -699,7 +707,7 @@ window.Zepto = window.Zepto || {};
         var height = parseInt(width * 2/3);
         var address = $map.data('address');
 
-        if (!$map.is('img')) return;
+        if (!$map.is('img')) { return; }
 
         function getBaiduMapImg(data) {
             if (!data.status) {
@@ -787,8 +795,8 @@ window.Zepto = window.Zepto || {};
         return function(coords) {
             // get the coords from wechat map api
             setTencentMap.call(that, coords);
-            $(window).resize(function() {setTencentMap.call(that, coords)});
-        }
+            $(window).resize(function() { setTencentMap.call(that, coords); });
+        };
     }
     var $weddingMap = $('#wedding-map');
     if ($weddingMap.length) {
@@ -835,7 +843,7 @@ window.Zepto = window.Zepto || {};
                     wx.ready(function() {
                         if ($.isArray(callback) && callback.length) {
                             $.each(callback, function(key, value) {
-                                typeof callback[key] === 'function' && value();
+                                typeof value === 'function' && value();
                             });
                         } else {
                             typeof callback === 'function' && callback();
@@ -896,7 +904,7 @@ window.Zepto = window.Zepto || {};
                     setSenderInfo('用户拒绝授权获取地理位置');
                 }
             });
-        }
+        };
     }
 
     // wechat record voice api
@@ -960,7 +968,7 @@ window.Zepto = window.Zepto || {};
         });
         // 4.5 播放音频
         $('.record-btn-play').on(TAP_CLICK_EVENT, function() {
-            if (voice.localId == '') {
+            if (voice.localId === '') {
                 alert('请先使用 startRecord 接口录制一段声音');
                 return;
             }
@@ -1027,7 +1035,7 @@ window.Zepto = window.Zepto || {};
         };
         */
     }
-    if ($('.record').length) signature(wxVoice);
+    if ($('.record').length) { signature(wxVoice); }
 
 })(Zepto);
 

@@ -20,7 +20,7 @@ if (isset($_GET['code'])) {
 
         <div class="cover"><img src="images/templet/t1/cover.jpg" alt=""></div>
 
-        <div class="countdown" data-date="2016/12/02 20:08:08">
+        <div class="countdown" data-date="2017/12/02 20:08:08">
             <div class="plate-title">
                 <img src="images/templet/t1/countdown-title.png" alt="">
                 <p class="plate-title-sub">- 离我们的婚礼开始还有<span class="countdown-days">00</span>天<span class="countdown-hours">00</span>小时<span class="countdown-minutes">00</span>分<span class="countdown-seconds">00</span>秒 -</p>

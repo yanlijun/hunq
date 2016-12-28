@@ -1,0 +1,31 @@
+{
+  "name": "Hunq",
+  "version": "1.0.0",
+  "description": "HUNQING template.",
+  "homepage": "yanlijun.com/client/hunq/templet.php",
+  "authors": "Kevin Yan",
+  "license": "MIT",
+  "keywords": [
+    "front-end",
+    "web",
+    "css"
+  ],
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "devDependencies": {
+    "bower": "^1.7.7",
+    "grunt": "^0.4.5",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-uglify": "^0.11.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "http-server": "^0.9.0"
+  },
+  "scripts": {
+    "postinstall": "bower install",
+    "prestart": "npm install",
+    "start": "http-server -a 0.0.0.0 -p 8002 -c-1 ./"
+  }
+}
